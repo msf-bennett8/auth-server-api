@@ -55,7 +55,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // MongoDB connection
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/your-database-name';
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/signup';
     
     await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
@@ -68,6 +68,30 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
+/*
+//I can replace above
+// MongoDB connection
+const connectDB = async () => {
+  try {
+    const mongoURI = process.env.MONGODB_URI;
+    
+    if (!mongoURI) {
+      throw new Error('MONGODB_URI environment variable is required');
+    }
+    
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    
+    console.log('✅ Connected to MongoDB successfully');
+  } catch (error) {
+    console.error('❌ MongoDB connection error:', error);
+    process.exit(1);
+  }
+};
+*/
+
 
 // Connect to database
 connectDB();
